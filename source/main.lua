@@ -1,12 +1,23 @@
+import "CoreLibs/sprites"
+
 local pd = playdate
 local gfx = pd.graphics
 
 
 -- Player
-local playerX = 40
-local playerY = 120
+local playerStartX = 40
+local playerStartY = 120
+local playerSpeed = 3
 local playerImage = gfx.image.new("images/chopper")
+local playerSprite = gfx.sprite.new(playerImage)
+playerSprite:setCollideRect(2, 2, 30, 30) --collision box is only 2 pixels smaller than the image!!!
+playerSprite:moveTo(playerStartX, playerStartY)
+playerSprite:add()
+
 
 function pd.update()
-    playerImage:draw(playerX, playerY)
+    gfx.sprite.update()
+
+    -- Insert player controls here
+
 end
