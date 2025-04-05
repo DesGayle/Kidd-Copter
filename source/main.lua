@@ -1,3 +1,4 @@
+
 import "CoreLibs/sprites"
 
 local pd = playdate
@@ -14,10 +15,19 @@ playerSprite:setCollideRect(2, 2, 30, 30) --collision box is only 2 pixels small
 playerSprite:moveTo(playerStartX, playerStartY)
 playerSprite:add()
 
+-- Game State
+local gameState = "stopped"
 
 function pd.update()
     gfx.sprite.update()
 
-    -- Insert player controls here
-
-end
+    if gameState == "stopped" then
+        gfx.drawText("Press A to Start", 200, 40)
+        if pd.buttonJustPressed(pd.kButtonA) then
+            gameState = "active"
+            playerSprite:moveTo(playerStartX, playerStartY)
+        end
+    elseif gameState == "active" then
+-- Insert player controls here
+        end
+    end
