@@ -15,6 +15,14 @@ playerSprite:setCollideRect(2, 2, 30, 30) --collision box is only 2 pixels small
 playerSprite:moveTo(playerStartX, playerStartY)
 playerSprite:add()
 
+-- Bomb Enemy
+local bombSpeed = 3
+local bombImage = gfx.image.new("images/bomb")
+local bombSprite = gfx.sprite.new(bombImage)
+bombSprite:setCollideRect(8, 5, 15, 6) --collision box is only 2 pixels smaller than the image!!!
+bombSprite:moveTo(450, 240)
+bombSprite:add()
+
 -- Game State
 local gameState = "stopped"
 --function pd.display.setRefreshRate(0)
@@ -30,9 +38,15 @@ function pd.update()
         if pd.buttonJustPressed(pd.kButtonA) then
             gameState = "active"
             playerSprite:moveTo(playerStartX, playerStartY)
+            bombSprite:moveTo(450, math.random(40, 200))
         end
     elseif gameState == "active" then
 -- Insert player controls here
+        end
+
+        bombSprite:moveBy(-bombSpeed, 0)
+        if bombSprite.x < -20 then
+            bombSprite:moveTo(450, math.random(40, 200))
         end
 
         if playerSprite.y > 270 or playerSprite.y < -30 then
