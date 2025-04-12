@@ -19,7 +19,8 @@ playerSprite:add()
 local bombSpeed = 3
 local bombImage = gfx.image.new("images/bomb")
 local bombSprite = gfx.sprite.new(bombImage)
-bombSprite:setCollideRect(8, 5, 15, 6) --collision box is only 2 pixels smaller than the image!!!
+bombSprite.collisionResponse = gfx.sprite.kCollisionTypeOverlap
+bombSprite:setCollideRect(8, 5, 15, 6)
 bombSprite:moveTo(450, 240)
 bombSprite:add()
 
@@ -44,12 +45,12 @@ function pd.update()
 -- Insert player controls here
         end
 
-        bombSprite:moveBy(-bombSpeed, 0)
+        local actualX, actualY, collisions, length = bombSprite:moveWithCollisions(bombSprite.x -bombSpeed, bombSprite.y)
         if bombSprite.x < -20 then
             bombSprite:moveTo(450, math.random(40, 200))
         end
 
-        if playerSprite.y > 270 or playerSprite.y < -30 then
+        if length > 0 or playerSprite.y > 270 or playerSprite.y < -30 then
             gameState = "stopped"
         end
     end
