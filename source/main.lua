@@ -1,4 +1,4 @@
-
+import "CoreLibs/graphics"
 import "CoreLibs/sprites"
 
 local pd = playdate
@@ -17,17 +17,25 @@ playerSprite:add()
 
 -- Game State
 local gameState = "stopped"
+--function pd.display.setRefreshRate(0)
+--end
 
 function pd.update()
+    pd.drawFPS(0, 228)
+    
     gfx.sprite.update()
 
     if gameState == "stopped" then
-        gfx.drawText("Press A to Start", 200, 40)
+        gfx.drawTextAligned("Press A to Start", 200, 40, kTextAlignment.center)
         if pd.buttonJustPressed(pd.kButtonA) then
             gameState = "active"
             playerSprite:moveTo(playerStartX, playerStartY)
         end
     elseif gameState == "active" then
 -- Insert player controls here
+        end
+
+        if playerSprite.y > 270 or playerSprite.y < -30 then
+            gameState = "stopped"
         end
     end
