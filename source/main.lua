@@ -39,6 +39,7 @@ function pd.update()
         if pd.buttonJustPressed(pd.kButtonA) then
             gameState = "active"
             score = 0
+            bombSpeed = 3
             playerSprite:moveTo(playerStartX, playerStartY)
             bombSprite:moveTo(450, math.random(40, 200))
         end
@@ -50,6 +51,7 @@ function pd.update()
         if bombSprite.x < -20 then
             bombSprite:moveTo(450, math.random(40, 200))
             score += 1
+            bombSpeed += 0.4
         end
 
         if length > 0 or playerSprite.y > 270 or playerSprite.y < -30 then
