@@ -31,9 +31,8 @@ local score = 0
 --end
 
 function pd.update()
-    pd.drawFPS(0, 228)
-    
     gfx.sprite.update()
+    pd.drawFPS(0, 228)
 
     if gameState == "stopped" then
         gfx.drawTextAligned("Press A to Start", 200, 40, kTextAlignment.center)
