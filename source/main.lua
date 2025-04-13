@@ -26,6 +26,7 @@ bombSprite:add()
 
 -- Game State
 local gameState = "stopped"
+local score = 0
 --function pd.display.setRefreshRate(0)
 --end
 
@@ -38,6 +39,7 @@ function pd.update()
         gfx.drawTextAligned("Press A to Start", 200, 40, kTextAlignment.center)
         if pd.buttonJustPressed(pd.kButtonA) then
             gameState = "active"
+            score = 0
             playerSprite:moveTo(playerStartX, playerStartY)
             bombSprite:moveTo(450, math.random(40, 200))
         end
@@ -48,9 +50,12 @@ function pd.update()
         local actualX, actualY, collisions, length = bombSprite:moveWithCollisions(bombSprite.x -bombSpeed, bombSprite.y)
         if bombSprite.x < -20 then
             bombSprite:moveTo(450, math.random(40, 200))
+            score += 1
         end
 
         if length > 0 or playerSprite.y > 270 or playerSprite.y < -30 then
             gameState = "stopped"
         end
     end
+
+    gfx.drawTextAligned("Score: " .. score, 390, 10, kTextAlignment.right)
