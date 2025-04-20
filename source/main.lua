@@ -4,6 +4,8 @@ import "CoreLibs/sprites"
 local pd = playdate
 local gfx = pd.graphics
 
+local musicPlayer = pd.sound.fileplayer.new("audio/KiddCopter_music_mono")
+
 
 -- Player
 local playerStartX = 40
@@ -42,6 +44,7 @@ function pd.update()
             bombSpeed = 3
             playerSprite:moveTo(playerStartX, playerStartY)
             bombSprite:moveTo(450, math.random(40, 200))
+            musicPlayer:play(0)
         end
     elseif gameState == "active" then
 -- Insert player controls here
