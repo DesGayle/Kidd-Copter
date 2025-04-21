@@ -1,6 +1,5 @@
 import "CoreLibs/graphics"
 import "CoreLibs/sprites"
-import "CoreLibs/sound"
 
 local pd = playdate
 local gfx = pd.graphics
@@ -49,6 +48,7 @@ function pd.update()
     pd.drawFPS(0, 228)
 
     if gameState == "stopped" then
+        playerSprite:setVisible(false)
         gfx.drawTextAligned("Press A to Start", 200, 40, kTextAlignment.center)
         musicPlayer:stop()
         bombSpeed = 0
@@ -57,6 +57,7 @@ function pd.update()
             score = 0
             bombSpeed = 5
             playerSprite:moveTo(playerStartX, playerStartY)
+            playerSprite:setVisible(true)
             bombSprite:moveTo(450, math.random(40, 200))
             musicPlayer:play(0)
             print("playerHopImage:", playerHopImage)
