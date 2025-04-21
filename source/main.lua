@@ -1,6 +1,6 @@
 import "CoreLibs/graphics"
 import "CoreLibs/sprites"
-
+import "CoreLibs/sound"
 
 local pd = playdate
 local gfx = pd.graphics
