@@ -17,7 +17,7 @@ playerSprite:moveTo(playerStartX, playerStartY)
 playerSprite:add()
 
 -- Bomb Enemy
-local bombSpeed = 3
+local bombSpeed = 0
 local bombImage = gfx.image.new("images/bomb")
 local bombSprite = gfx.sprite.new(bombImage)
 bombSprite.collisionResponse = gfx.sprite.kCollisionTypeOverlap
