@@ -22,8 +22,9 @@ playerSprite:add()
 local velocityX = 0
 local velocityY = 0
 local gravity = 0.2
-local hopStrength = -4
+local hopStrength = -4 -- vertical hop speed
 local hopSpeed = 0.3 -- horizontal hop speed
+local jumpAnimator = nil
 
 -- Bomb Enemy
 local bombSpeed = 0
@@ -61,6 +62,8 @@ function pd.update()
         if pd.buttonJustPressed(pd.kButtonA) then
             velocityY = hopStrength
             velocityX = hopSpeed 
+            --jumpAnimator = gfx.animator.new(300, playerHopImage)
+            --playerSprite:setImage(jumpAnimator:playerHopImage())
         end
 
         local actualX, actualY, collisions, length = bombSprite:moveWithCollisions(bombSprite.x -bombSpeed, bombSprite.y)
