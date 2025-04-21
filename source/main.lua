@@ -71,12 +71,12 @@ function pd.update()
             jumpAnimator = gfx.animator.new(300, playerHopImage)
         end
 
-        local frame = jumpAnimator and jumpAnimator:image()
+        if jumpAnimator then
+            local frame = jumpAnimator:image()
         if frame then
             playerSprite:setImage(frame)
-        else
-            playerSprite:setImage(playerIdleImage)
         end
+    end
 
         local actualX, actualY, collisions, length = bombSprite:moveWithCollisions(bombSprite.x -bombSpeed, bombSprite.y)
         if bombSprite.x < -20 then
