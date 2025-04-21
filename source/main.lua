@@ -5,6 +5,7 @@ local pd = playdate
 local gfx = pd.graphics
 
 local musicPlayer = pd.sound.fileplayer.new("audio/KiddCopter_music_mono")
+local explosionSFX = pd.sound.sampleplayer.new("audio/explosion.wav")
 
 -- Player
 local playerStartX = 40
@@ -12,8 +13,6 @@ local playerStartY = 120
 local playerSpeed = 3
 local playerIdleImage = gfx.image.new("images/chopper_idle")
 local playerHopImage = gfx.imagetable.new("images/chopper_hop")
-
-
 
 local playerSprite = gfx.sprite.new(playerIdleImage)
 playerSprite:setCollideRect(2, 2, 30, 30) --Need to either change the shape to be a more sophisticated "plus" shape or ignore the tail.
@@ -38,10 +37,31 @@ bombSprite:setCollideRect(8, 5, 15, 6)
 bombSprite:moveTo(450, 240)
 bombSprite:add()
 
+-- Explosion
+local explosionAnim = gfx.imagetable.new("images/explosion")
+local explosionSprite = nil
+
 -- Game State
 local gameState = "stopped"
 local score = 0
--- Maybe add some code here to hide the player?
+
+function spawnExplosion(x, y)
+    explosionSprite = gfx.sprite.new()
+    local explosionAnim = gfx.animator.new(500, explosionAnim)
+
+    function explosionSprite:update()
+        local frame = explosionAnim:image()
+        if frame then
+            self:setImage(frame)
+        else
+            self:remove()
+            explosionSprite = nil
+        end
+    end
+
+    explosionSprite:moveTo(x, y)
+    explosionSprite:add()
+end
 
 function pd.update()
     gfx.sprite.update()
@@ -49,6 +69,7 @@ function pd.update()
 
     if gameState == "stopped" then
         playerSprite:setVisible(false)
+        bombSprite:setVisible(false)
         gfx.drawTextAligned("Press A to Start", 200, 40, kTextAlignment.center)
         musicPlayer:stop()
         bombSpeed = 0
@@ -59,6 +80,7 @@ function pd.update()
             playerSprite:moveTo(playerStartX, playerStartY)
             playerSprite:setVisible(true)
             bombSprite:moveTo(450, math.random(40, 200))
+            bombSprite:setVisible(true)
             musicPlayer:play(0)
             print("playerHopImage:", playerHopImage)
         end
@@ -87,6 +109,8 @@ function pd.update()
 
         if length > 0 or playerSprite.y > 270 or playerSprite.y < -30 then
             gameState = "stopped"
+            spawnExplosion(playerSprite.x, playerSprite.y)
+            explosionSFX:play()
         end
 
         gfx.drawTextAligned("Score: " .. score, 390, 10, kTextAlignment.right)
