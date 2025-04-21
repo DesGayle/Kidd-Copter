@@ -19,7 +19,7 @@ playerSprite:add()
 -- Player Movement
 local velocityX = 0
 local velocityY = 0
-
+local gravity = 0.8
 local hopStrength = -10
 local hopSpeed = 2 -- horizontal hop speed
 
@@ -35,7 +35,7 @@ bombSprite:add()
 -- Game State
 local gameState = "stopped"
 local score = 0
-local gravity = 0.8
+-- Maybe add some code here to hide the player?
 
 function pd.update()
     gfx.sprite.update()
@@ -48,13 +48,16 @@ function pd.update()
         if pd.buttonJustPressed(pd.kButtonA) then
             gameState = "active"
             score = 0
-            bombSpeed = 3
+            bombSpeed = 5
             playerSprite:moveTo(playerStartX, playerStartY)
             bombSprite:moveTo(450, math.random(40, 200))
             musicPlayer:play(0)
         end
     elseif gameState == "active" then
--- Insert player controls here
+        velocityY += gravity
+        if pd.buttonJustPressed(pd.kButtonA) then
+            velocityY = hopStrength
+            velocityX = hopSpeed 
         end
 
         local actualX, actualY, collisions, length = bombSprite:moveWithCollisions(bombSprite.x -bombSpeed, bombSprite.y)
@@ -70,3 +73,4 @@ function pd.update()
 
         gfx.drawTextAligned("Score: " .. score, 390, 10, kTextAlignment.right)
     end
+end
