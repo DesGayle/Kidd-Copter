@@ -16,6 +16,13 @@ playerSprite:setCollideRect(2, 2, 30, 30) --collision box is only 2 pixels small
 playerSprite:moveTo(playerStartX, playerStartY)
 playerSprite:add()
 
+-- Player Movement
+local velocityX = 0
+local velocityY = 0
+
+local hopStrength = -10
+local hopSpeed = 2 -- horizontal hop speed
+
 -- Bomb Enemy
 local bombSpeed = 0
 local bombImage = gfx.image.new("images/bomb")
@@ -28,6 +35,7 @@ bombSprite:add()
 -- Game State
 local gameState = "stopped"
 local score = 0
+local gravity = 0.8
 
 function pd.update()
     gfx.sprite.update()
@@ -36,6 +44,7 @@ function pd.update()
     if gameState == "stopped" then
         gfx.drawTextAligned("Press A to Start", 200, 40, kTextAlignment.center)
         musicPlayer:stop()
+        bombSpeed = 0
         if pd.buttonJustPressed(pd.kButtonA) then
             gameState = "active"
             score = 0
