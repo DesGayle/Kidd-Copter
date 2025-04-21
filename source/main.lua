@@ -10,8 +10,10 @@ local musicPlayer = pd.sound.fileplayer.new("audio/KiddCopter_music_mono")
 local playerStartX = 40
 local playerStartY = 120
 local playerSpeed = 3
-local playerImage = gfx.image.new("images/chopper")
-local playerSprite = gfx.sprite.new(playerImage)
+local playerIdleImage = gfx.image.new("images/chopper_idle")
+local playerHopImage = gfx.imagetable.new("images/chopper_hop")
+
+local playerSprite = gfx.sprite.new(playerIdleImage)
 playerSprite:setCollideRect(2, 2, 30, 30) --collision box is only 2 pixels smaller than the image!!!
 playerSprite:moveTo(playerStartX, playerStartY)
 playerSprite:add()
