@@ -19,9 +19,9 @@ playerSprite:add()
 -- Player Movement
 local velocityX = 0
 local velocityY = 0
-local gravity = 0.8
-local hopStrength = -10
-local hopSpeed = 2 -- horizontal hop speed
+local gravity = 0.2
+local hopStrength = -4
+local hopSpeed = 0.3 -- horizontal hop speed
 
 -- Bomb Enemy
 local bombSpeed = 0
@@ -55,6 +55,7 @@ function pd.update()
         end
     elseif gameState == "active" then
         velocityY += gravity
+        playerSprite:moveBy(velocityX, velocityY)
         if pd.buttonJustPressed(pd.kButtonA) then
             velocityY = hopStrength
             velocityX = hopSpeed 
