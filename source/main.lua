@@ -1,6 +1,7 @@
 import "CoreLibs/graphics"
 import "CoreLibs/sprites"
 
+
 local pd = playdate
 local gfx = pd.graphics
 
@@ -13,8 +14,10 @@ local playerSpeed = 3
 local playerIdleImage = gfx.image.new("images/chopper_idle")
 local playerHopImage = gfx.imagetable.new("images/chopper_hop")
 
+
+
 local playerSprite = gfx.sprite.new(playerIdleImage)
-playerSprite:setCollideRect(2, 2, 30, 30) --collision box is only 2 pixels smaller than the image!!!
+playerSprite:setCollideRect(2, 2, 30, 30) --Need to either change the shape to be a more sophisticated "plus" shape or ignore the tail.
 playerSprite:moveTo(playerStartX, playerStartY)
 playerSprite:add()
 
@@ -24,6 +27,7 @@ local velocityY = 0
 local gravity = 0.2
 local hopStrength = -4 -- vertical hop speed
 local hopSpeed = 0.3 -- horizontal hop speed
+
 local jumpAnimator = nil
 
 -- Bomb Enemy
@@ -55,15 +59,22 @@ function pd.update()
             playerSprite:moveTo(playerStartX, playerStartY)
             bombSprite:moveTo(450, math.random(40, 200))
             musicPlayer:play(0)
+            print("playerHopImage:", playerHopImage)
         end
     elseif gameState == "active" then
         velocityY += gravity
         playerSprite:moveBy(velocityX, velocityY)
         if pd.buttonJustPressed(pd.kButtonA) then
             velocityY = hopStrength
-            velocityX = hopSpeed 
-            --jumpAnimator = gfx.animator.new(300, playerHopImage)
-            --playerSprite:setImage(jumpAnimator:playerHopImage())
+            velocityX = hopSpeed
+            jumpAnimator = gfx.animator.new(300, playerHopImage)
+        end
+
+        local frame = jumpAnimator and jumpAnimator:image()
+        if frame then
+            playerSprite:setImage(frame)
+        else
+            playerSprite:setImage(playerIdleImage)
         end
 
         local actualX, actualY, collisions, length = bombSprite:moveWithCollisions(bombSprite.x -bombSpeed, bombSprite.y)
