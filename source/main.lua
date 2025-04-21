@@ -6,7 +6,6 @@ local gfx = pd.graphics
 
 local musicPlayer = pd.sound.fileplayer.new("audio/KiddCopter_music_mono")
 
-
 -- Player
 local playerStartX = 40
 local playerStartY = 120
@@ -29,8 +28,6 @@ bombSprite:add()
 -- Game State
 local gameState = "stopped"
 local score = 0
---function pd.display.setRefreshRate(0)
---end
 
 function pd.update()
     gfx.sprite.update()
@@ -38,6 +35,7 @@ function pd.update()
 
     if gameState == "stopped" then
         gfx.drawTextAligned("Press A to Start", 200, 40, kTextAlignment.center)
+        musicPlayer:stop()
         if pd.buttonJustPressed(pd.kButtonA) then
             gameState = "active"
             score = 0
@@ -60,6 +58,6 @@ function pd.update()
         if length > 0 or playerSprite.y > 270 or playerSprite.y < -30 then
             gameState = "stopped"
         end
-    end
 
-    gfx.drawTextAligned("Score: " .. score, 390, 10, kTextAlignment.right)
+        gfx.drawTextAligned("Score: " .. score, 390, 10, kTextAlignment.right)
+    end
