@@ -7,28 +7,31 @@ local playerStartX = 40
 local playerStartY = 120
 local playerSpeed = 3
 local playerIdleImage = gfx.image.new("assets/chopper_idle")
-local playerHopImage = gfx.imagetable.new("assets/chopper_hop")
+-- local playerHopImage = gfx.imagetable.new("assets/chopper_hop")
 
 -- Player Movement
-local velocityX = 0
-local velocityY = 0
-local gravity = 0.2
-local hopStrength = -4 -- vertical hop speed
+
+local gravity = 0.05
+local hopStrength = -2 -- vertical hop speed
 local hopSpeed = 0.3 -- horizontal hop speed
-
-local jumpAnimator = nil
-
-
 
  -- create the player
 function Player:init()
     Player.super.init(self, playerIdleImage)
     self:moveTo(playerStartX, playerStartY)
     self:setCollideRect(2, 2, 30, 30) --Need to either change the shape to be a more sophisticated "plus" shape or ignore the tail.
-    
-    
+    self.velocityX = 0
+    self.velocityY = 0
 end
-
-function Player:update()
     -- update every frame
+function Player:update()
+    Player.super.update(self)
+
+    self.velocityY = self.velocityY + gravity
+    self:moveBy(self.velocityX, self.velocityY)
+        
+    if pd.buttonJustPressed(pd.kButtonA) then
+        self.velocityY = hopStrength
+        self.velocityX = hopSpeed
+    end
 end
