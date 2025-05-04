@@ -32,13 +32,17 @@ end
 local explosionSFX = pd.sound.sampleplayer.new("assets/explosion.wav") ]]
 
 local player = Player()
+local floor = nil -- Declare the floor sprite
 
 local function init()
+    floor = Floor("assets/floor", 220, 400)
+    floor:add()
     player:add()
 end
 
 function pd.update()
     gfx.sprite.update()
+
     pd.drawFPS(0, 228)
     
     StateManager:update()

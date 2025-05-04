@@ -1,6 +1,8 @@
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
+import "sprites/vfx"
+
 class("Player").extends(gfx.sprite)
 
 local playerStartX = 40
@@ -27,11 +29,35 @@ end
 function Player:update()
     Player.super.update(self)
 
-    self.velocityY = self.velocityY + gravity
-    self:moveBy(self.velocityX, self.velocityY)
+    self.velocityY = self.velocityY + gravity -- Apply gravity
+    local actualX, actualY, collisions, length = self:moveWithCollisions(self.x + self.velocityX, self.y + self.velocityY)
+
+    --self:moveBy(self.velocityX, self.velocityY)
+
+    for i = 1, length do
+        local collision = collisions[i]
+        if collision.other == floor then
+            self:explode() -- Trigger explosion
+            StateManager:setState("gameover") -- Set game state to game over
+            break
+        end
+    end
         
     if pd.buttonJustPressed(pd.kButtonA) then
         self.velocityY = hopStrength
-        self.velocityX = hopSpeed
+        --self.velocityX = hopSpeed
     end
+end
+
+function Player:explode()
+    -- Play explosion sound
+    local explosionSFX = pd.sound.sampleplayer.new("assets/explosion.wav")
+    explosionSFX:play()
+
+    -- Create and add the explosion animation
+    local explosion = Explosion(self.x, self.y)
+    explosion:add()
+
+    -- Remove the player sprite (optional)
+    self:remove()
 end
