@@ -29,9 +29,11 @@ end
 local explosionSFX = pd.sound.sampleplayer.new("assets/explosion.wav") ]]
 
 local player = Player()
+--local particles = Particles()
 
 local function init()
     Environment.init()
+    --particles:add()
 end
 
 function pd.update()

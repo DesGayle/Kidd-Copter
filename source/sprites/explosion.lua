@@ -7,7 +7,7 @@ function Explosion:init(x, y)
     Explosion.super.init(self)
 
     -- Load the explosion image table
-    local explosionImages = gfx.imagetable.new("assets/explosion")
+    local explosionImages = gfx.imagetable.new("images/explosion")
     assert(explosionImages, "Failed to load explosion image table!")
 
     -- Set the sprite to use the image table

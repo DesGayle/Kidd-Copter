@@ -2,7 +2,7 @@ local pd <const> = playdate
 local gfx <const> = pd.graphics
 
 local floorSprite = nil -- Declare the floor sprite
-local floorImagePath = "assets/waterTexture.png"
+local floorImagePath = "images/waterTexture.png"
 local floorImage = gfx.image.new(floorImagePath)
 if not floorImage then
     error("Failed to load floor image at path: " .. floorImagePath)

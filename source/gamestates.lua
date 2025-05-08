@@ -49,8 +49,8 @@ end
 
 -- PAUSED STATE
 function gamestates.paused()
-    local controlsImage = gfx.image.new("assets/controls")
-    local logoImage = gfx.image.new("assets/logo")
+    local controlsImage = gfx.image.new("images/controls")
+    local logoImage = gfx.image.new("images/logo")
 
     return {
         update = function()
