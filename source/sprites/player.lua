@@ -8,8 +8,8 @@ class("Player").extends(gfx.sprite)
 local playerStartX = 100 --this was fine, just needed a recompile
 local playerStartY = 120
 local playerSpeed = 3
-local playerIdleImage = gfx.image.new("images/chopper_idle")
--- local playerHopImage = gfx.imagetable.new("assets/chopper_hop")
+local playerIdleImage = gfx.image.new("images/chopperIdle")
+local playerHopImage = gfx.imagetable.new("images/chopperHop")
 
 -- Player Movement
 local gravity = 0.05
@@ -23,6 +23,9 @@ function Player:init()
     self:setCollideRect(6, 2, 26, 28)
     self.velocityX = 0
     self.velocityY = 0
+
+    self.isAnimating = false -- Flag to track animation state
+    self.animationIndex = 1 -- Track the current animation frame
 end
     -- update every frame
 function Player:update()
@@ -42,9 +45,20 @@ function Player:update()
         end
     end
         
-    if pd.buttonJustPressed(pd.kButtonA) then
+    if pd.buttonJustPressed(pd.kButtonA) and not self.isAnimating then
+        self.isAnimating = true
+        self.animationIndex = 1 -- Reset animation index
         self.velocityY = hopStrength
         --self.velocityX = hopSpeed
+    end
+
+    if self.isAnimating then
+        self:setImage(playerHopImage[self.animationIndex])
+        self.animationIndex += 1
+        if self.animationIndex > #playerHopImage then
+            self.isAnimating = false
+            self:setImage(playerIdleImage) -- Reset to idle image
+        end
     end
 end
 

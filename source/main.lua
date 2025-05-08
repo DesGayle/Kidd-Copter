@@ -38,7 +38,7 @@ end
 
 function pd.update()
     gfx.sprite.update()
-    pd.drawFPS(0, 0) -- Draw the FPS in the top-left corner but is being cleared by something...
+    pd.drawFPS(0, 0) -- BUG:Draw the FPS in the top-left corner but is being cleared by something...
     
     StateManager:update()
     StateManager:draw()
