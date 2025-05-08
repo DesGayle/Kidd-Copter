@@ -21,7 +21,7 @@ local hopSpeed = 0.3 -- horizontal hop speed
 function Player:init()
     Player.super.init(self, playerIdleImage)
     self:moveTo(playerStartX, playerStartY)
-    self:setCollideRect(2, 2, 30, 30) --Need to either change the shape to be a more sophisticated "plus" shape or ignore the tail.
+    self:setCollideRect(6, 2, 26, 28)
     self.velocityX = 0
     self.velocityY = 0
 end
