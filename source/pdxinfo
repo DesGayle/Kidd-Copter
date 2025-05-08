@@ -3,4 +3,6 @@ author=Kid Desimo
 description=
 bundleID=com.alteredgene.kiddcopter
 version=1.1.0
-buildNumber=1
+buildNumber=3
+imagePath=system
+contentWarning=This game contains cartoon violence.

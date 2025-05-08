@@ -23,10 +23,11 @@ function Player:init()
     self:setCollideRect(6, 2, 26, 28)
     self.velocityX = 0
     self.velocityY = 0
-
-    self.isAnimating = false -- Flag to track animation state
-    self.animationIndex = 1 -- Track the current animation frame
+    
 end
+    --[[ self.isAnimating = false -- Flag to track animation state
+    self.animationIndex = 1 -- Track the current animation frame ]]
+
     -- update every frame
 function Player:update()
     Player.super.update(self)
@@ -47,7 +48,7 @@ function Player:update()
         
     if pd.buttonJustPressed(pd.kButtonA) and not self.isAnimating then
         self.isAnimating = true
-        self.animationIndex = 1 -- Reset animation index
+        self.animationIndex = 1 -- Reset animation index to 1
         self.velocityY = hopStrength
         --self.velocityX = hopSpeed
     end
