@@ -5,7 +5,7 @@ import "sprites/vfx"
 
 class("Player").extends(gfx.sprite)
 
-local playerStartX = 40
+local playerStartX = 100 --this was fine, just needed a recompile
 local playerStartY = 120
 local playerSpeed = 3
 local playerIdleImage = gfx.image.new("assets/chopper_idle")
