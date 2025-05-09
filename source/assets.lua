@@ -1,0 +1,3 @@
+assets = {
+    bullet = "images/bullet",
+}

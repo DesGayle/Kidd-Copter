@@ -90,6 +90,7 @@ end
 function gamestates.credits()
     return {
         update = function()
+            -- Check for button presses to return to menu
             if playdate.buttonJustPressed(playdate.kButtonA) or playdate.buttonJustPressed(playdate.kButtonB) then
                 StateManager:setState("menu")
             end

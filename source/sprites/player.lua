@@ -53,6 +53,17 @@ function Player:update()
         --self.velocityX = hopSpeed
     end
 
+    -- shooting bullets
+
+    local isButtonPressed = pd.buttonJustPressed(pd.kButtonB)
+
+    if isButtonPressed then
+        local bullet = Bullet()
+        bullet:spawn(self.x, self.y, 5, 0) -- Set the bullet's position to the player's position
+        
+        --bullet:moveBy(0, -10) -- Move the bullet upwards
+    end
+
     if self.isAnimating then
         self:setImage(playerHopImage[self.animationIndex])
         self.animationIndex += 1

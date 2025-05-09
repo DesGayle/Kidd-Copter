@@ -2,6 +2,7 @@ import "CoreLibs/object"
 import "CoreLibs/sprites"
 import "CoreLibs/graphics"
 
+import "assets"
 import "sprites"
 import "gamestates"
 import "statemanager"
@@ -34,6 +35,8 @@ local player = Player()
 local function init()
     Environment.init()
     --particles:add()
+
+   
 end
 
 function pd.update()
