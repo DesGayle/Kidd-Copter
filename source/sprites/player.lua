@@ -37,14 +37,14 @@ function Player:update()
 
     --self:moveBy(self.velocityX, self.velocityY)
 
-    for i = 1, length do
+    --[[ for i = 1, length do
         local collision = collisions[i]
         if collision.other == floor then
             self:explode() -- Trigger explosion
             StateManager:setState("gameover") -- Set game state to game over
             break
         end
-    end
+    end ]]
         
     if pd.buttonJustPressed(pd.kButtonA) and not self.isAnimating then
         self.isAnimating = true

@@ -18,19 +18,19 @@ function Bullet:spawn(posX, posY, velX, velY)
     self.velocityX = velX
     self.velocityY = velY
 
-    -- Set the collision response
-   --[[  self.collisionResponse = gfx.sprite.kCollisionTypeOverlap
-    self:setCollideRect(0, 0, 16, 16) -- Adjust the collision rectangle as needed ]]
+    -- Set the collision response, ignore everything for now
+    --[[ self.collisionResponse = gfx.sprite.kCollisionTypeNone
+    self:setCollideRect(0, 0, 16, 16) ]] -- Adjust the collision rectangle as needed ]]
     
 end
 
 function Bullet:update()
     -- Update the bullet's position based on its velocity
-    --local x, y = self:position()
+    --local x = self:position()
     self:moveBy(self.velocityX, self.velocityY)
 
     -- Check if the bullet is off-screen and remove it if so
-   --[[  if x < 0 or x > 400 or y < 0 or y > 240 then
+   --[[ if x < 0 or x > 400 then
         self:remove()
     end ]]
 end
