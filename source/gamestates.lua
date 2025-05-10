@@ -49,8 +49,9 @@ end
 
 -- PAUSED STATE
 function gamestates.paused()
-    local controlsImage = gfx.image.new("images/controls")
-    local logoImage = gfx.image.new("images/logo")
+    --[[ local pauseImage = gfx.image.new("images/paused")
+
+    playdate.setMenuImage(pauseImage, 200) ]]
 
     return {
         update = function()
