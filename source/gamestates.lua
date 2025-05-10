@@ -6,6 +6,7 @@ gamestates = {}
 
 -- MENU STATE
 function gamestates.menu()
+    local menuImage = gfx.image.new("images/titleScreen")
     return {
         enter = function()
             gfx.clear()
@@ -17,8 +18,7 @@ function gamestates.menu()
         end,
         draw = function()
             gfx.clear()
-            gfx.drawTextAligned("Kidd Copter", 200, 80, kTextAlignment.center)
-            gfx.drawTextAligned("Press A to Start", 200, 120, kTextAlignment.center)
+            menuImage:draw(0, 0)
         end
     }
 end
