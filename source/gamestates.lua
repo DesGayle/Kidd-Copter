@@ -1,23 +1,23 @@
--- gamestates.lua
---local StateManager = import("statemanager")
+
+local pd <const> = playdate
 local gfx <const> = playdate.graphics
 
 gamestates = {}
 
 -- MENU STATE
 function gamestates.menu()
-    local menuImage = gfx.image.new("images/titleScreen")
+    local menuImage = gfx.image.new("images/titleScreen.png")
     return {
         enter = function()
-            gfx.clear()
+           
         end,
         update = function()
-            if playdate.buttonJustPressed(playdate.kButtonA) then
+            if pd.buttonJustPressed(pd.kButtonA) then
                 StateManager:setState("playing")
             end
         end,
         draw = function()
-            gfx.clear()
+            gfx.clear(gfx.kColorWhite)
             menuImage:draw(0, 0)
         end
     }
@@ -46,27 +46,6 @@ function gamestates.playing()
         end
     }
 end
-
--- PAUSED STATE Not needed? Handled by the system by default?
---[[ function gamestates.paused()
- local pauseImage = gfx.image.new("images/paused")
-
-    playdate.setMenuImage(pauseImage, 200)
-
-    return {
-        update = function()
-        
-        end,
-        draw = function()
-            gfx.setColor(gfx.kColorWhite)
-            gfx.fillRect(0, 0, 400, 240)
-            --[[ controlsImage:draw(20, 60)
-            logoImage:draw(260, 60) 
-            gfx.setColor(gfx.kColorBlack)
-            gfx.drawText("Paused - Open menu to resume", 100, 20)
-        end
-    }
-end ]]
 
 -- GAMEOVER STATE
 function gamestates.gameover()
