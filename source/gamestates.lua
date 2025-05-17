@@ -47,11 +47,11 @@ function gamestates.playing()
     }
 end
 
--- PAUSED STATE
-function gamestates.paused()
-    --[[ local pauseImage = gfx.image.new("images/paused")
+-- PAUSED STATE Not needed? Handled by the system by default?
+--[[ function gamestates.paused()
+ local pauseImage = gfx.image.new("images/paused")
 
-    playdate.setMenuImage(pauseImage, 200) ]]
+    playdate.setMenuImage(pauseImage, 200)
 
     return {
         update = function()
@@ -61,12 +61,12 @@ function gamestates.paused()
             gfx.setColor(gfx.kColorWhite)
             gfx.fillRect(0, 0, 400, 240)
             --[[ controlsImage:draw(20, 60)
-            logoImage:draw(260, 60) ]]
+            logoImage:draw(260, 60) 
             gfx.setColor(gfx.kColorBlack)
             gfx.drawText("Paused - Open menu to resume", 100, 20)
         end
     }
-end
+end ]]
 
 -- GAMEOVER STATE
 function gamestates.gameover()

@@ -12,7 +12,7 @@ local gfx <const> = pd.graphics
 
 StateManager:addState("menu", gamestates.menu())
 StateManager:addState("playing", gamestates.playing())
-StateManager:addState("paused", gamestates.paused())
+--StateManager:addState("paused", gamestates.paused())
 StateManager:addState("gameover", gamestates.gameover())
 StateManager:addState("credits", gamestates.credits())
 
