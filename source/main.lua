@@ -24,6 +24,8 @@ local player = Player()
 --local particles = Particles()
 
 local function init()
+    local pauseMenuImage = gfx.image.new("images/paused")
+    pd.setMenuImage(pauseMenuImage)
     Environment.init()
     --particles:add()
 
@@ -31,10 +33,11 @@ local function init()
 end
 
 function pd.update()
+    gfx.sprite.update()
+    
     StateManager:update()
     StateManager:draw()
-
-    gfx.sprite.update()
+    
     pd.drawFPS(0, 0)
 end
 

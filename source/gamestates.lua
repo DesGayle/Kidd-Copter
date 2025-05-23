@@ -14,6 +14,8 @@ function gamestates.menu()
         update = function()
             if pd.buttonJustPressed(pd.kButtonA) then
                 StateManager:setState("playing")
+            elseif pd.buttonJustPressed(pd.kButtonB) then
+                StateManager:setState("credits")
             end
         end,
         draw = function()
@@ -71,16 +73,18 @@ function gamestates.credits()
     return {
         update = function()
             -- Check for button presses to return to menu
-            if playdate.buttonJustPressed(playdate.kButtonA) or playdate.buttonJustPressed(playdate.kButtonB) then
+            if pd.buttonJustPressed(pd.kButtonB) then
                 StateManager:setState("menu")
             end
         end,
         draw = function()
             gfx.clear()
             gfx.drawTextAligned("Credits", 200, 60, kTextAlignment.center)
-            gfx.drawTextAligned("Game by Altered Gene", 200, 100, kTextAlignment.center)
-            gfx.drawTextAligned("Music by ...", 200, 120, kTextAlignment.center)
-            gfx.drawTextAligned("Press A or B to return", 200, 200, kTextAlignment.center)
+            gfx.drawTextAligned("art and animation by Lu Nascimento", 200, 100, kTextAlignment.center)
+            gfx.drawTextAligned("title screen and menu by Cyrus", 200, 120, kTextAlignment.center)
+            gfx.drawTextAligned("created and developed by Kid Desimo", 200, 140, kTextAlignment.center)
+            gfx.drawTextAligned("music from #Uppbeat (free for Creators!)", 200, 160, kTextAlignment.center)
+            gfx.drawTextAligned("Press B to return", 200, 200, kTextAlignment.center)
         end
     }
 end
